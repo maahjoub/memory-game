@@ -6,7 +6,7 @@ document.querySelector('.splash-btn span').onclick = function () {
     } else {
         document.getElementById('game-audio').play()
         document.querySelector(".name span").innerHTML = yourName
-        countDown(5)
+        countDown(300)
         document.querySelector('.splash-btn').remove()  
     }
 }
