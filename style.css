@@ -117,4 +117,19 @@ body {
         flex-direction: column;
         align-items: center;
     }
+    .memory-game-blocks .game-block{
+        height: 100px;
+        flex: 1 0 100px;
+    }
+    .memory-game-blocks .game-block .front {
+        line-height: 100px;
+    }
+    .memory-game-blocks .game-block .front::before {
+        font-size: 95px;
+    }
+    .memory-game-blocks .game-block .back img {
+        width: 100px;
+        height: 75px;
+        margin-top: 8px;
+    }
 }
