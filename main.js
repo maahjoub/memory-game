@@ -52,7 +52,7 @@ function checkMatchedBlock (firstBlock, secondBlock) {
             secondBlock.classList.remove('is-flipped')
         }, duration)
     }
-    if (parseInt(tryElement.innerHTML) === 2) {
+    if (parseInt(tryElement.innerHTML) === 10) {
         setTimeout(() => {
             document.getElementById('game-over').play()
             let splash = document.createElement("div")
