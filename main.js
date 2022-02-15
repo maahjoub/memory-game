@@ -3,6 +3,7 @@ document.querySelector('.splash-btn span').onclick = function () {
     if (yourName == null || yourName == "") {
         alert(" عليك كتابة اسمك لبدء اللعب")
     } else {
+        document.getElementById('game-audio').play()
         document.querySelector(".name span").innerHTML = yourName
         document.querySelector('.splash-btn').remove()  
     }
