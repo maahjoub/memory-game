@@ -1,3 +1,4 @@
+var timer = document.querySelector(".timer"), countDownInterval
 document.querySelector('.splash-btn span').onclick = function () {
     yourName = prompt("الرجاء كتابة اسمك")
     if (yourName == null || yourName == "") {
@@ -5,6 +6,7 @@ document.querySelector('.splash-btn span').onclick = function () {
     } else {
         document.getElementById('game-audio').play()
         document.querySelector(".name span").innerHTML = yourName
+        countDown(5)
         document.querySelector('.splash-btn').remove()  
     }
 }
@@ -53,8 +55,9 @@ function checkMatchedBlock (firstBlock, secondBlock) {
             secondBlock.classList.remove('is-flipped')
         }, duration)
     }
-    if (parseInt(tryElement.innerHTML) === 10) {
+    if (parseInt(tryElement.innerHTML) === 10 ) {
         setTimeout(() => {
+            document.getElementById('game-audio').currentTime = 0
             document.getElementById('game-over').play()
             let splash = document.createElement("div")
             splash.className = "btn1"
@@ -81,4 +84,35 @@ function shuffle(array) {
         array[random] = [temp]
     }
     return array
+}
+
+function countDown (duration) {
+    
+        var minutes, seconds
+        countDownInterval = setInterval( () =>{
+            minutes = parseInt (duration / 60 )
+            seconds = parseInt (duration % 60 )
+            minutes = minutes < 10 ? `0${minutes}` : minutes
+            seconds = seconds < 10 ? `0${seconds}` : seconds
+            timer.innerHTML =`${minutes}:${seconds}`
+            if (--duration < 0) {
+            clearInterval(countDownInterval)  
+                setTimeout(() => {
+            document.getElementById('game-audio').currentTime = 0
+            document.getElementById('game-over').play()
+            let splash = document.createElement("div")
+            splash.className = "btn1"
+            document.querySelector('body').appendChild(splash)
+            let gameOver = document.createElement("span")
+            gameOver.className = "game-over"
+            let gameOverTxt = document.createTextNode("GAME OVER")
+            gameOver.appendChild(gameOverTxt)
+            splash.appendChild(gameOver)
+        }, duration + duration)
+       setTimeout(() => {
+           location.reload();
+       }, duration + 3500)
+            }
+        }, 1000)
+    
 }
