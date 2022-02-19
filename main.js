@@ -129,7 +129,7 @@ function countDown (duration) {
 }
 function finesh () {
     let allFlippedBlockMatch = document.getElementsByClassName("has-match")
-    if (allFlippedBlockMatch.length == 2) {
+    if (allFlippedBlockMatch.length == 20) {
         next = document.getElementById("next-stage")
         next.className = "show"
     }
