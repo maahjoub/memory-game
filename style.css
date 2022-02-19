@@ -112,24 +112,46 @@ body {
     height: 100%;
     width: 100%;
 }
+.next, .show {
+    position: absolute;
+    top: 400px;
+    left: 120px;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: #fff;
+    background-color: #21f963;
+    border-radius: 7px;
+    font-size: 22px;
+    font-weight: bold;
+}
+.show {
+    display: block!important;
+}
+.next {
+    display: none;
+}
+
 @media (max-width:767px) {
     .info {
         flex-direction: column;
         align-items: center;
     }
     .memory-game-blocks .game-block{
-        height: 100px;
-        flex: 1 0 100px;
+        height: 40px;
+        flex: 1 0 40px;
     }
     .memory-game-blocks .game-block .front {
-        line-height: 100px;
+        line-height: 33px;
     }
     .memory-game-blocks .game-block .front::before {
-        font-size: 95px;
+        font-size: 30px;
     }
     .memory-game-blocks .game-block .back img {
-        width: 100px;
-        height: 75px;
-        margin-top: 8px;
+        width: 30px;
+        height: 30px;
+        margin-top: 0px;
+    }
+    .memory-game-blocks .game-block {
+        margin: 0px 5px 10px;
     }
 }

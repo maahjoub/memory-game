@@ -1,19 +1,29 @@
-var timer = document.querySelector(".timer"), countDownInterval
-document.querySelector('.splash-btn span').onclick = function () {
-    yourName = prompt("الرجاء كتابة اسمك")
-    if (yourName == null || yourName == "") {
-        alert(" عليك كتابة اسمك لبدء اللعب")
-    } else {
-        document.getElementById('game-audio').play()
-        document.querySelector(".name span").innerHTML = yourName
-        countDown(300)
-        document.querySelector('.splash-btn').remove()  
-    }
-}
 let duration = 1000
 let memoryGameBlocks = document.querySelector(".memory-game-blocks")
 let blocks = Array.from(memoryGameBlocks.children)
 let orderRang = [...Array(blocks.length).keys()]
+var timer = document.querySelector(".timer"), countDownInterval
+var splash = document.querySelector('.splash-btn span')
+
+if (splash!= null) {
+    splash.onclick = function () {
+        yourName = prompt("الرجاء كتابة اسمك")
+        if (yourName == null || yourName == "") {
+            alert(" عليك كتابة اسمك لبدء اللعب")
+        } else {
+            document.getElementById('game-audio').play()
+            document.querySelector(".name span").innerHTML = yourName
+            localStorage.setItem("name", yourName)
+            countDown(900)
+            document.querySelector('.splash-btn').remove()
+        }
+    }
+}else {
+    document.getElementById('game-audio').play()
+    document.querySelector(".name span").innerHTML = localStorage.getItem("name")
+    countDown(900)
+}
+
 shuffle(orderRang)
 blocks.forEach((block, index) => {
     block.style.order = orderRang[index]
@@ -29,6 +39,7 @@ function flipBlock (selectedBlock)
         stopClicking()
         checkMatchedBlock(allFlippedBlock[0], allFlippedBlock[1])
     }
+   
 }
 
 function stopClicking() {
@@ -43,10 +54,10 @@ function checkMatchedBlock (firstBlock, secondBlock) {
     if (firstBlock.dataset.frot === secondBlock.dataset.frot) {
         firstBlock.classList.remove('is-flipped')
         secondBlock.classList.remove('is-flipped')
-
         firstBlock.classList.add('has-match')
         secondBlock.classList.add('has-match')
         document.getElementById('success').play()
+        finesh ()
     } else {
         tryElement.innerHTML = parseInt(tryElement.innerHTML) + 1
         document.getElementById('fail').play()
@@ -55,7 +66,7 @@ function checkMatchedBlock (firstBlock, secondBlock) {
             secondBlock.classList.remove('is-flipped')
         }, duration)
     }
-    if (parseInt(tryElement.innerHTML) === 10 ) {
+    if (parseInt(tryElement.innerHTML) === 100 ) {
         setTimeout(() => {
             document.getElementById('game-audio').currentTime = 0
             document.getElementById('game-over').play()
@@ -114,5 +125,13 @@ function countDown (duration) {
        }, duration + 3500)
             }
         }, 1000)
+    
+}
+function finesh () {
+    let allFlippedBlockMatch = document.getElementsByClassName("has-match")
+    if (allFlippedBlockMatch.length == 2) {
+        next = document.getElementById("next-stage")
+        next.className = "show"
+    }
     
 }
